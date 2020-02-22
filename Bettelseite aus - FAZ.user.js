@@ -13,6 +13,8 @@
 document.onreadystatechange = function () {
   if (document.readyState === "interactive") {
     // tell the AdBlocker script that everything is fine
-	  unsafeWindow.sptoggleOff= true;
+    unsafeWindow.sptoggleOff= true;
+    // Relevant code on FAZ page is
+    // var isDisabled = (typeof window.sptoggleOff !== "undefined" && window.sptoggleOff) || …
   }
 }
