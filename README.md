@@ -93,3 +93,6 @@ In **Settings** -> **Packagizer** ist Folgendes einzutragen:
 4. Aktiviere **Filename** `<jd:source:1>`
 5. Aktiviere **Auto Confirm** *Enabled*
 6. Aktiviere **Auto Start Download** *Enabled*
+
+## Amazon NoSponsor
+Entfernt alle "gesponserten" Treffer in Suchergebnissen.
