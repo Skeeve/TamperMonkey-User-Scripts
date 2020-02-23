@@ -8,7 +8,7 @@ Schaltet die AdBlocker Erkennung auf der FAZ Seite ab.
 Entfernt alle Werbung von Chefkoch Seiten.
 
 ## s-to *
-Verschiedene Scripte die zum Teil zusammenarbeitenum
+Verschiedene Scripte die zum Teil zusammenarbeiten um
 mit Hilfe von [jDownloader](https://jdownloader.org/)
 Serienfolgen direkt in Ihren Zielordner zu laden.
 
@@ -41,7 +41,7 @@ Es ermittelt Informationen über die Serie, die Staffel,
 und die Episode.
 Reichert das Ganze mit Informationen über den Ablageort
 im Dateisystem an und schickt das Ergebnis an den lokalen
-jDownloader Prozess.
+jDownloader Prozess und schließt anschließend die Seite.
 Die URL für den Prozess wird im Script als Variable
 `JDOWNLOADER` definiert.
 
@@ -51,14 +51,14 @@ die Folge geladen und im gewünschten Ordner abgelegt.
 Der Ordner wird in diesem Script in der Variable
 `TARGET` festgelegt.
 
-#### Einstellungen für jDownloader
+#### Einstellungen in jDownloader fü s.to Stream Hosters
 In **Settings** -> **Packagizer** ist Folgendes einzutragen:
 
 1. **Add** anklicken
 2. Name: **#S-TO#**
 3. Aktiviere **Sourceurl(s)** *equals*
    `^https?://.*#S-TO#(.*)$`
-   Regular Expression aktivieren
+   Regular Expression aktivieren.
 
    **Anmerkung**: `#S-TO#` ist eine "Markierung".
    Sie wird in **s.to Stream Hosters** in der Variablen
@@ -68,3 +68,28 @@ In **Settings** -> **Packagizer** ist Folgendes einzutragen:
 5. Aktiviere **Auto Confirm** *Enabled*
 6. Aktiviere **Auto Start Download** *Enabled*
 
+## bandcamp
+Macht auf [bandcamp Albumseiten](https://bandcamp.com/)
+Albumcover anklickbar.
+
+Ein Klick auf das Cover sendet alle Track-URLs an einen
+lokal laufenden jDownloader-Prozess.
+Die URL für den Prozess wird im Script als Variable
+`JDOWNLOADER` definiert.
+
+### Einstellungen in jDownloader für bandcamp
+In **Settings** -> **Packagizer** ist Folgendes einzutragen:
+
+1. **Add** anklicken
+2. Name: **#MP3#**
+3. Aktiviere **Sourceurl(s)** *equals*
+   `^https?://.*#MP3#(.*__\d+__.*__\d+__.*)$`
+   Regular Expression aktivieren.
+
+   **Anmerkung**: `#MP3#` ist eine "Markierung".
+   Sie wird in **bandcamp** in der Variablen
+   `TAG4JD` festgelegt.
+
+4. Aktiviere **Filename** `<jd:source:1>`
+5. Aktiviere **Auto Confirm** *Enabled*
+6. Aktiviere **Auto Start Download** *Enabled*
