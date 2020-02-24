@@ -23,7 +23,9 @@ $('.seriesListContainer a').each(
         // Alle Staffel Links herausziehen, die nicht as "seen" markiert sind
         // Das schließt auch die erste Staffel mit ein, da sie im Normalfall
         // als "active" markiert ist.
-        var seasons= $(series_info).find('#stream > ul:first-child a:not(a.seen)');
+        // Zusätzlich werden alle Links ausgefiltert, deren Bezeichnung nicht ausschließlich
+        // aus Ziffern besteht (Siehe Doctor Who "Filme")
+        var seasons= $(series_info).find('#stream > ul:first-child a:not(a.seen)').filter(function(i){ return this.textContent.match(/^\d+/)!==null });
         // Alle Episoden-Links der ungesehenen Folgen der aktiven Staffel herausziehen
         var episodes= $(series_info).find('#stream > ul a[data-season-id]:not(a.seen)');
         // Das Genre Element holen
@@ -34,6 +36,8 @@ $('.seriesListContainer a').each(
           elt.href= seasons[0].href;
           // Und die Informationen über die Episode hinter dem Genre einfügen.
           genre.text(genre.text() + " " + episodes[0].getAttribute("data-season-id") + "-" + episodes[0].innerText);
+          // Highlight with an existing class
+          $(elt).addClass('formsection');
         } else {
           // Gibt es eine ungesehene Staffel?
           if (seasons.length > 1) {
@@ -52,6 +56,8 @@ $('.seriesListContainer a').each(
                 if (episodes.length > 0) {
                   // Die Informationen hinter dem Genre einfügen
                   genre.text(genre.text() + " " + episodes[0].getAttribute("data-season-id") + "-" + episodes[0].innerText);
+                  // Highlight with an existing class
+				          $(elt).addClass('formsection');
                 }
               }
             });
