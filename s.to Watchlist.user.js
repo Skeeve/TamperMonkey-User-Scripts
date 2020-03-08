@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name     s.to watchlist
-// @version  1
+// @version  2
 // @grant    none
 // @include  https://s.to/account/watchlist
 // @include  https://s.to/account/watchlist/asc
@@ -11,6 +11,11 @@
 // Userscript für s.to - Watchlist.
 // Fügt hinter dem Genre die Staffel und Episodennummer der
 // ersten ungesehenen Folge ein.
+// Holt Serien mit neuen Folgen nach vorne in der Liste.
+// Kann die Liste nach Titel sortieren.
+
+// Sollen ungesehene Serien (unsortiert!) nach vorne geholt werden?
+var neu_nach_vorne= true; // false statt true, wenn sie nicht nach vorne sollen
 
 // Sortieren
 var direction= 0;
@@ -24,7 +29,7 @@ else if (document.location.href.match(/\/desc/) !== null) {
 if (direction !== 0 ) {
   var c=seriesContainer.children('div');
   c.sort( function(a,b) {
-    return direction * $(a).find('h3').text().localeCompare($(b).find('h3').text())
+    return direction * serien_cmp(a,b)
   });
   seriesContainer.append(c);
 }
@@ -58,7 +63,7 @@ $('.seriesListContainer a').each(
           // Highlight mit existierender class
           $(elt).addClass('formsection');
           // Serie an den Anfang der Liste setzen
-          seriesContainer.prepend($(elt).parent());
+          if (neu_nach_vorne) seriesContainer.prepend($(elt).parent());
         } else {
           // Gibt es eine ungesehene Staffel?
           if (seasons.length > 1) {
@@ -78,9 +83,9 @@ $('.seriesListContainer a').each(
                   // Die Informationen hinter dem Genre einfügen
                   genre.text(genre.text() + " " + episodes[0].getAttribute("data-season-id") + "-" + episodes[0].innerText);
                   // Highlight mit existierender class
-				          $(elt).addClass('formsection');
-									// Serie an den Anfang der Liste setzen
-				          seriesContainer.prepend($(elt).parent());
+                  $(elt).addClass('formsection');
+                  // Serie an den Anfang der Liste setzen
+                  if (neu_nach_vorne) seriesContainer.prepend($(elt).parent());
                 }
               }
             });
@@ -90,3 +95,8 @@ $('.seriesListContainer a').each(
     });
   }
 );
+
+function serien_cmp(a, b) {
+  return $(a).find('h3').text().localeCompare($(b).find('h3').text());
+}
+
