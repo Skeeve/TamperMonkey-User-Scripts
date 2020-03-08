@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name     s.to watchlist
-// @version  2
+// @version  3
 // @grant    none
 // @include  https://s.to/account/watchlist
 // @include  https://s.to/account/watchlist/asc
@@ -34,6 +34,8 @@ if (direction !== 0 ) {
   seriesContainer.append(c);
 }
 
+// Serienzähler
+var s_count= seriesContainer.children('div').length;
 // Zunächst alle Serien einsammeln
 $('.seriesListContainer a').each(
   function(i, elt) {
@@ -44,7 +46,7 @@ $('.seriesListContainer a').each(
       success: function(result) {
         // Die Seite parsen (Pseudo-HTML durch umklammerndes root-Element)
         var series_info= $.parseHTML("<root>" + result + "</root>");
-        // Alle Staffellinks herausziehen, die nicht as "seen" markiert sind
+        // Alle Staffellinks herausziehen, die nicht als "seen" markiert sind
         // Das schließt auch die erste Staffel mit ein, da sie im Normalfall
         // als "active" markiert ist.
         // Zusätzlich werden alle Links ausgefiltert, deren Bezeichnung nicht ausschließlich
@@ -62,8 +64,7 @@ $('.seriesListContainer a').each(
           genre.text(genre.text() + " " + episodes[0].getAttribute("data-season-id") + "-" + episodes[0].innerText);
           // Highlight mit existierender class
           $(elt).addClass('formsection');
-          // Serie an den Anfang der Liste setzen
-          if (neu_nach_vorne) seriesContainer.prepend($(elt).parent());
+          if ( 0 == --s_count && neu_nach_vorne ) to_front(); 
         } else {
           // Gibt es eine ungesehene Staffel?
           if (seasons.length > 1) {
@@ -84,11 +85,12 @@ $('.seriesListContainer a').each(
                   genre.text(genre.text() + " " + episodes[0].getAttribute("data-season-id") + "-" + episodes[0].innerText);
                   // Highlight mit existierender class
                   $(elt).addClass('formsection');
-                  // Serie an den Anfang der Liste setzen
-                  if (neu_nach_vorne) seriesContainer.prepend($(elt).parent());
                 }
+                if ( 0 == --s_count && neu_nach_vorne ) to_front(); 
               }
             });
+          } else {
+            if ( 0 == --s_count && neu_nach_vorne ) to_front(); 
           }
         }
       }
@@ -100,3 +102,6 @@ function serien_cmp(a, b) {
   return $(a).find('h3').text().localeCompare($(b).find('h3').text());
 }
 
+function to_front() {
+  seriesContainer.prepend( seriesContainer.find('a.formsection').parent() );
+}
