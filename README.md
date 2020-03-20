@@ -7,6 +7,12 @@ Schaltet die AdBlocker Erkennung auf der FAZ Seite ab.
 ## Chefkock NoAd
 Entfernt alle Werbung von Chefkoch Seiten.
 
+## Musescore to jDownloader
+
+Auf einet Score Seite von Musescore einmal durch
+die Noten scrollen. Sie werden dann an jDownloader
+übertragen.
+
 ## s-to *
 Verschiedene Scripte die zum Teil zusammenarbeiten um
 mit Hilfe von [jDownloader](https://jdownloader.org/)
