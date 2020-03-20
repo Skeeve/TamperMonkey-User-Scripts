@@ -40,10 +40,11 @@ function do_stuff() {
         // Yes, so we will take that
         currentLanguage= en.getAttribute("data-lang-key");
         title= siteTitle.querySelector('h2 .episodeEnglishTitel').textContent;
-        seasondir='Season';
       }
     }
-    
+    if (currentLanguage == "2") {
+      seasondir='Season';
+    }
     // set the window name to the info just found
     window.name= [series, season, episode, title, seasondir].join(sep).replace(/\s*[:\/]\s*/g, ' - ');
     
