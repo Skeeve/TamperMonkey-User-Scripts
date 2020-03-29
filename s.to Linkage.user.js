@@ -3,6 +3,7 @@
 // @version  1
 // @grant    none
 // @include  https://s.to/serie/stream/*/staffel-*
+// @include  https://serienstream.sx/serie/stream/*/staffel-*
 // @exclude  https://s.to/serie/stream/*/staffel-*/episode-*
 // ==/UserScript==
 
