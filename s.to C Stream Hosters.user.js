@@ -1,15 +1,18 @@
 // ==UserScript==
-// @name     s.to Stream Hosters
+// @name     s.to C Stream Hosters
 // @version  1
-// @include  http://streamcloud.eu/*/.html
-// @include  https://openload.co/embed/*
-// @include  https://streamango.com/embed/*
-// @include  https://vidoza.net/*
-// @include  https://vidoza.org/*
-// @include  https://vivo.sx/*
-// @include  https://gounlimited.to/*
-// @include  https://oload.stream/*
-// @grant    GM.xmlHttpRequest
+// @match  http://streamcloud.eu/*/.html
+// @match  https://openload.co/embed/*
+// @match  https://streamango.com/embed/*
+// @match  https://streamtape.com/*
+// @match  https://vidoza.net/*
+// @match  https://vidoza.org/*
+// @match  https://vivo.sx/*
+// @match  https://voe.sx/*
+// @match  https://gounlimited.to/*
+// @match  https://oload.stream/*
+// @match  https://upstream.to/*
+// @grant    GM_xmlhttpRequest
 // ==/UserScript==
 
 // My default location for storing stuff
@@ -35,6 +38,10 @@ function toJDownloader (link) {
     return;
   }
   var sinfo= window.name.split(SEP);
+  if (sinfo.length == 1) {
+      // Oops. It's missing. Search in the hash part
+      sinfo= decodeURIComponent(document.location.hash.substr(1)).split(SEP);
+  }
   var package= "";
   var saveto="";
   // So if we have something matching the pattern
@@ -59,7 +66,7 @@ function toJDownloader (link) {
   };
   console.debug(JDOWNLOADER, data);
   // Send the data
-  GM.xmlHttpRequest({
+  GM_xmlhttpRequest({
   	method: "POST",
   	url: JDOWNLOADER,
   	data: objEncodeURIComponent(data),
@@ -67,21 +74,26 @@ function toJDownloader (link) {
  	  	"Content-Type": "application/x-www-form-urlencoded"
   	},
     onload: function(response) {
-    	if ( response.status === 200 ) {
-        document.querySelector('body').textContent="DONE!";
-        window.name=DONE;
-        window.location.reload();
-      }
+        if ( response.status === 200 ) {
+            document.querySelector('body').textContent="DONE!";
+            window.name=DONE;
+            window.location.reload();
+            console.log("Would close now");
+        }
+        else {
+            console.log(response);
+        }
   	},
 	});
 }
 
 function objEncodeURIComponent(obj) {
   var str = [];
-  for (var p in obj)
+  for (var p in obj) {
     if (obj.hasOwnProperty(p)) {
       str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
     }
+  }
   return str.join("&");
 }
 
@@ -92,4 +104,4 @@ function fill0(x, num) {
 }
 
 // Send current page - after some preparing - to jDownloader
-toJDownloader(document.location.href);
+toJDownloader(document.location.href.replace(/#.*$/, ''));

@@ -93,6 +93,9 @@ $('.seriesListContainer a').each(
               }
             });
           } else {
+            var seasons = $(series_info).find('#stream > ul:first-child a');
+            var the_last = seasons.length;
+            elt.href= seasons[the_last-1].href;
             if ( 0 == --s_count && neu_nach_vorne ) to_front(); 
           }
         }

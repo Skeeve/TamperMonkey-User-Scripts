@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name     s.to Linkage
+// @name     s.to A Linkage
 // @version  1
 // @grant    none
 // @include  https://s.to/serie/stream/*/staffel-*

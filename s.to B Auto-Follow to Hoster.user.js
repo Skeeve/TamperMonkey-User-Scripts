@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name     s.to Auto-Follow to Hoster
+// @name     s.to B Auto-Follow to Hoster
 // @version  1
 // @grant    none
 // @include  https://s.to/serie/stream/*/staffel-*/episode-*
@@ -21,13 +21,13 @@ function do_stuff() {
   try {
     // Get the name of the series
     var series= document.querySelector('div.hosterSeriesTitle').textContent;
-    
+
     // get the season and episode
     var siteTitle=document.querySelector('div.hosterSiteTitle');
 		var season= siteTitle.getAttribute('data-season');
 		var episode= siteTitle.getAttribute('data-episode');
     var title= siteTitle.querySelector('h2 :first-child').textContent;
-    
+
     // get the current language
     var lng= document.querySelector("img.selectedLanguage");
     var currentLanguage = lng.getAttribute("data-lang-key");
@@ -48,7 +48,7 @@ function do_stuff() {
     }
     // set the window name to the info just found
     window.name= [series, season, episode, title, seasondir].join(sep).replace(/\s*[:\/]\s*/g, ' - ');
-    
+
     // preferred hosters
     var hosters= [ "Streamcloud", "Openload", "Streamango" ];
     // was a hoster appended?
@@ -57,7 +57,7 @@ function do_stuff() {
     if (hoster !== "") {
       hosters.push(hoster);
     }
-    
+
     // Try to find a link for the preferred hoster and language
     var n= null;
     while (n === null) {
@@ -68,12 +68,14 @@ function do_stuff() {
       n= document.querySelector("li[data-lang-key='"+currentLanguage+"'] i.icon." + hoster);
     }
     console.log(hoster);
-    
+
     // go to that page
     while (n.nodeName !== "LI") {
       n= n.parentNode;
     }
-    document.location= n.getAttribute('data-link-target');
+      let newLocation = n.getAttribute('data-link-target') + "#" + window.name;
+      console.log(newLocation);
+      document.location= newLocation;
   }
   catch (e) {
     console.log(e);
