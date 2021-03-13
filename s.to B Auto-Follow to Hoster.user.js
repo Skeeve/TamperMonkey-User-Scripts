@@ -2,7 +2,7 @@
 // @name     s.to B Auto-Follow to Hoster
 // @version  1
 // @grant    none
-// @include  https://s.to/serie/stream/*/staffel-*/episode-*
+// @include  https://serien.sx/serie/stream/*/staffel-*/episode-*
 // @include  https://serienstream.sx/serie/stream/*/staffel-*/episode-*
 // ==/UserScript==
 

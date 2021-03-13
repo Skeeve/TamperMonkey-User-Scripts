@@ -2,9 +2,9 @@
 // @name     s.to A Linkage
 // @version  1
 // @grant    none
-// @include  https://s.to/serie/stream/*/staffel-*
+// @include  https://serien.sx/serie/stream/*/staffel-*
 // @include  https://serienstream.sx/serie/stream/*/staffel-*
-// @exclude  https://s.to/serie/stream/*/staffel-*/episode-*
+// @exclude  https://serien.sx/serie/stream/*/staffel-*/episode-*
 // ==/UserScript==
 
 // Alle Links auf eine s.to Serien-Seite ändern,
