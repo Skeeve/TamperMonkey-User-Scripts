@@ -3,10 +3,13 @@
 // @version  3
 // @grant    none
 // @include  https://serien.sx/account/watchlist
+// @include  https://serien.vc/account/watchlist
 // @include  https://serienstream.sx/account/watchlist
 // @include  https://serien.sx/account/watchlist/asc
+// @include  https://serien.vc/account/watchlist/asc
 // @include  https://serienstream.sx/account/watchlist/asc
 // @include  https://serien.sx/account/watchlist/desc
+// @include  https://serien.vc/account/watchlist/desc
 // @include  https://serienstream.sx/account/watchlist/desc
 // @require  https://code.jquery.com/jquery-3.4.1.min.js
 // ==/UserScript==
