@@ -1,15 +1,21 @@
 // ==UserScript==
 // @name     s.to watchlist
-// @version  3
+// @version  4
 // @grant    none
 // @include  https://serien.sx/account/watchlist
 // @include  https://serien.vc/account/watchlist
+// @include  https://serien.ac/account/watchlist
+// @include  https://serien.*/account/watchlist
 // @include  https://serienstream.sx/account/watchlist
 // @include  https://serien.sx/account/watchlist/asc
 // @include  https://serien.vc/account/watchlist/asc
+// @include  https://serien.ac/account/watchlist/asc
+// @include  https://serien.*/account/watchlist/asc
 // @include  https://serienstream.sx/account/watchlist/asc
 // @include  https://serien.sx/account/watchlist/desc
 // @include  https://serien.vc/account/watchlist/desc
+// @include  https://serien.ac/account/watchlist/desc
+// @include  https://serien.*/account/watchlist/desc
 // @include  https://serienstream.sx/account/watchlist/desc
 // @require  https://code.jquery.com/jquery-3.4.1.min.js
 // ==/UserScript==
