@@ -1,14 +1,16 @@
 // ==UserScript==
 // @name     s.to A Linkage
-// @version  4
+// @version  5
 // @grant    none
 // @include  https://serien.sx/serie/stream/*/staffel-*
 // @include  https://serien.vc/serie/stream/*/staffel-*
+// @include  https://s.to/serie/stream/*/staffel-*
 // @include  https://serien.ac/serie/stream/*/staffel-*
 // @include  https://serien.*/serie/stream/*/staffel-*
 // @include  https://serienstream.sx/serie/stream/*/staffel-*
 // @exclude  https://serien.sx/serie/stream/*/staffel-*/episode-*
 // @exclude  https://serien.vc/serie/stream/*/staffel-*/episode-*
+// @exclude  https://s.to/serie/stream/*/staffel-*/episode-*
 // @exclude  https://serien.ac/serie/stream/*/staffel-*/episode-*
 // @exclude  https://serien.*/serie/stream/*/staffel-*/episode-*
 // ==/UserScript==

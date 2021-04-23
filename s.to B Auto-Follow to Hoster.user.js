@@ -1,9 +1,10 @@
 // ==UserScript==
 // @name     s.to B Auto-Follow to Hoster
-// @version  4
+// @version  5
 // @grant    none
 // @include  https://serien.sx/serie/stream/*/staffel-*/episode-*
 // @include  https://serien.vc/serie/stream/*/staffel-*/episode-*
+// @include  https://s.to/serie/stream/*/staffel-*/episode-*
 // @include  https://serien.ac/serie/stream/*/staffel-*/episode-*
 // @include  https://serien.*/serie/stream/*/staffel-*/episode-*
 // @include  https://serienstream.sx/serie/stream/*/staffel-*/episode-*
