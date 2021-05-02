@@ -1,0 +1,43 @@
+javascript:(function(){
+     var loc ="https://help.twitter.com/forms/general?subtopic=suspended";
+     if (document.location.href !== loc) return document.location.href = loc;
+     var setters = {
+         "app" : "desktop",
+         "description" : "German court ruled that the reason why you blocked me is a valid and legal statement. It is in no way an encouragement to murder anyone.\n\nThe german party »Die PARTEI« (where I am a member of) was accused for the same sentence (»Nazis töten.«) and were found ungilty.\n\nEven more: Those people who accused them were sentenced.\n\nPease find the English translation of the verdict below:\n\nLocal court Bielefeld, 9 Gs 5355/19\nDate: 19.02.2020\nCourt: Bielefeld Local Court\nDecision-making body: Division 9 Gs\nDecision type: Decision\nFile number: 9 Gs 5355/19\nECLI: ECLI:DE:AGBI:2020:0219.9GS5355.19.00\n \nTenor: In the preliminary proceedings against A., B. and C. on suspicion of public provocation to commit criminal offences, it is established that the confiscation of the posters bearing the inscriptions »Kill Nazis« and »A Nazi could hang here« on 8 November 2019 was unlawful.\n \nReasons:\n\nI. The accused are members of the Bielefeld district association of the party »Die Partei« and hung up posters in Bielefeld on 8 November 2019 with the contents mentioned in the tenor. Among them was the invitation to participate in the counter-demonstration on 9 November 2019 in a smaller font size for a demonstration planned by the party »Die Rechte« for this day. The posters were placed along the route of the right-wing assembly.\n\nAfter the accused's action was reported to the police, the officers deployed met the three accused in the evening of 08.11.2019 in the area of the Bielefeld Kunsthalle. They declared that the statement »Killing Nazis« was not an incitement but referred to the crimes committed by Nazis. The statement »A Nazi could hang here« refers to the possibility that instead of the poster they hung, a poster with right-wing content could hang there.\n\nThe posters were subsequently confiscated with a view to criminal liability under, inter alia, § 111 StGB (German Criminal Code), but were returned after the proceedings were discontinued under § 170 (2) StGB.\n\nIn an application dated 06.01.2020, the Bielefeld district association of the party »Die Partei« applied for a declaratory judgment that the confiscation was unlawful.\n\nII. the application is admissible and well-founded.\n\nThe confiscation was unlawful due to the lack of punishable content of the posters. The statements do not constitute a criminal offence, but are rather covered as expressions of opinion by Article 5.1 sentence 1 of the Basic Law.\n\nThere is no criminal liability, in particular according to § 111 StGB (German Criminal Code), as the posters do not contain any seriously intended incitements to commit criminal offences. Although the statements do not lack a certain ambiguity, an interpretation not subject to punishment, as explained by the accused at the time of confiscation, cannot be ruled out in consideration of the overall context. Any other interpretation of § 111 StGB is prohibited in the light of Article 5 of the Basic Law.\n\nBielefeld, 19.02.2020\n\n\nTranslated with www.DeepL.com/Translator (free version)\n\n-----------\n\nI demand that you unsuspend my account now after %% of suspension.\n\nPlease tell me against whom I have to apply in court because of this false accusation.\n\n-----------\n\n\nGerman Original of the verdict as can be found on http://www.justiz.nrw.de/nrwe/lgs/bielefeld/ag_bielefeld/j2020/9_Gs_5355_19_Beschluss_20200219.html\n\n\nAmtsgericht Bielefeld, 9 Gs 5355/19\nDatum: 19.02.2020\nGericht: Amtsgericht Bielefeld\nSpruchkörper: Abteilung 9 Gs\nEntscheidungsart: Beschluss\nAktenzeichen: 9 Gs 5355/19\nECLI: ECLI:DE:AGBI:2020:0219.9GS5355.19.00\n \nTenor: In dem Ermittlungsverfahren gegen A., B. und C. wegen des Verdachts der öffentlichen Aufforderung zu Straftaten wird festgestellt, dass die am 08.11.2019 erfolgte Beschlagnahme der Plakate mit den Aufschriften »Nazis töten.« und »Hier könnte ein Nazi hängen« rechtswidrig war.\n \nGründe:\n\nI. Die Beschuldigten sind Mitglieder des Kreisverbandes Bielefeld der Partei »Die Partei« und hängten am 08.11.2019 in Bielefeld Plakate mit den im Tenor genannten Inhalten auf. Darunter befand sich jeweils in einer kleineren Schriftgröße die Aufforderung, am 09.11.2019 an der Gegendemonstration zu einer von der Partei »Die Rechte« für diesen Tag geplanten Demonstration teilzunehmen. Die Plakate wurden dabei entlang der Wegstrecke der rechten Versammlung angebracht.\n\nNachdem das Vorgehen der Beschuldigten der Polizei gemeldet wurde, trafen die eingesetzten Beamten am Abend des 08.11.2019 im Bereich der Bielefelder Kunsthalle auf die drei Beschuldigten. Diese erklärten, die Aussage »Nazis töten.« sei keine Aufforderung, sondern beziehe sich auf die von Nazis begangenen Straftaten. Die Aussage »Hier könnte ein Nazi hängen« beziehe sich auf die Möglichkeit, dass anstelle des von ihnen aufgehängten Plakats auch ein Plakat mit rechten Inhalt dort hängen könne.\n\nDie Plakate wurden im Anschluss im Hinblick auf eine Strafbarkeit u.a. gemäß § 111 StGB beschlagnahmt, nach Einstellung des Verfahrens gemäß § 170 Abs. 2 StGB jedoch wieder herausgegeben.\n\nMit Antrag vom 06.01.2020 hat der Kreisverband Bielefeld der Partei »Die Partei« beantragt, die Rechtswidrigkeit der Beschlagnahme festzustellen.\n\nII. Der Antrag ist zulässig und begründet.\n\nDie Beschlagnahme war mangels strafbaren Inhalts der Plakate rechtswidrig. Die Aussagen stellen keine strafbare Handlung dar, sondern sind vielmehr als Meinungsäußerungen von Art. 5 Abs. 1 S. 1 GG gedeckt.\n\nEine Strafbarkeit insbesondere nach § 111 StGB ist nicht gegeben, da die Plakate keine ernstgemeinten Aufforderungen zu Straftaten enthalten. Die Aussagen entbehren zwar nicht einer gewissen Zweideutigkeit, allerdings kann unter Berücksichtigung des Gesamtzusammenhangs eine nicht strafbewehrte Deutung, so wie sie von den Beschuldigten auch bei der Beschlagnahme erläutert wurde, nicht ausgeschlossen werden. Eine anderweitige Auslegung des § 111 StGB verbietet sich im Lichte von Art. 5 GG.\n\nBielefeld, 19.02.2020\n\n",
+         "name" : "Stephan Hradek",
+     };
+     var clicker = "recaptcha-consent-button";
+     function plural(num, txt) {
+         if (num == 0) return "";
+         if (num == 1) return num + " " + txt;
+         return num + " " + txt + "s";
+     };
+     var millis = new Date() - new Date("2020-10-25 10:42");
+     var quotient = 7 * 24 * 60 * 60 * 1000;
+     var weeks = Math.floor(millis / quotient);
+     millis = millis % quotient;
+     quotient /= 7;
+     var days = Math.floor(millis / quotient);
+     millis = millis % quotient;
+     quotient /= 24;
+     var hours = Math.floor(millis / quotient);
+     millis = millis % quotient;
+     quotient /= 60;
+     var minutes = Math.floor(millis / quotient);
+     var durations = [
+         plural(weeks, "week"),
+         plural(days, "day"),
+         plural(hours, "hour"),
+         plural(minutes, "minute"),
+     ];
+     var duration = durations
+         .filter(function(x){return x!==""})
+         .join(", ")
+         .replace(/^(.*[^,], )/, "$1and ")
+         .replace(/^([^,]+), and/, "$1 and")
+     ;
+     setters["description"] = setters["description"].replace(/%%/, duration);
+     for(var key in setters) {
+         document.getElementById(key).value = setters[key];
+      }
+      document.getElementById(clicker).click(); })()
