@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name     s.to C Stream Hosters
-// @version  1
+// @version  2
 // @match  http://streamcloud.eu/*/.html
 // @match  https://openload.co/embed/*
 // @match  https://streamango.com/embed/*
