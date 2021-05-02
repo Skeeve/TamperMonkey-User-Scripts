@@ -12,6 +12,7 @@
 // @match  https://gounlimited.to/*
 // @match  https://oload.stream/*
 // @match  https://upstream.to/*
+// @match  https://streamtape.com/*
 // @grant    GM_xmlhttpRequest
 // ==/UserScript==
 
