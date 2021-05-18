@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name     s.to B Auto-Follow to Hoster
-// @version  5
+// @version  6
 // @grant    none
 // @include  https://serien.sx/serie/stream/*/staffel-*/episode-*
 // @include  https://serien.vc/serie/stream/*/staffel-*/episode-*
@@ -13,7 +13,7 @@
 // These episodes I want to get in english
 var english= [
 	'The Orville',
-  'Death in Paradise',
+  /* 'Death in Paradise',*/
   /*'Young Sheldon',*/
   'The Big Bang Theory',
   'Doctor Who',
