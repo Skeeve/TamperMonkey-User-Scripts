@@ -1,6 +1,8 @@
 // ==UserScript==
 // @name     s.to A Linkage
-// @version  5
+// @namespace    http://tampermonkey.net/
+// @author       https://github.com/Skeeve
+// @version  7
 // @grant    none
 // @include  https://serien.sx/serie/stream/*/staffel-*
 // @include  https://serien.vc/serie/stream/*/staffel-*

@@ -1,6 +1,8 @@
 // ==UserScript==
 // @name     s.to watchlist
-// @version  5
+// @namespace    http://tampermonkey.net/
+// @author       https://github.com/Skeeve
+// @version  7
 // @grant    none
 // @include  https://serien.sx/account/watchlist
 // @include  https://serien.vc/account/watchlist

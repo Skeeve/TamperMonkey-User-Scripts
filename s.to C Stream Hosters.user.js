@@ -1,6 +1,8 @@
 // ==UserScript==
 // @name     s.to C Stream Hosters
-// @version  2
+// @namespace    http://tampermonkey.net/
+// @author       https://github.com/Skeeve
+// @version  7
 // @match  http://streamcloud.eu/*/.html
 // @match  https://openload.co/embed/*
 // @match  https://streamango.com/embed/*
