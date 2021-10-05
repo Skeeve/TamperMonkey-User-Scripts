@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
-// @author       You
+// @author       https://github.com/Skeeve
 // @match        https://www.amazon.com/*
 // @match        https://www.amazon.de/*
 // @grant        none
