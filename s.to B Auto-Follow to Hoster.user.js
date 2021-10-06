@@ -2,7 +2,8 @@
 // @name     s.to B Auto-Follow to Hoster
 // @namespace    http://tampermonkey.net/
 // @author       https://github.com/Skeeve
-// @version  7
+// @version  8
+// @description  Follow to the selected hoster
 // @grant    none
 // @include  https://serien.sx/serie/stream/*/staffel-*/episode-*
 // @include  https://serien.vc/serie/stream/*/staffel-*/episode-*

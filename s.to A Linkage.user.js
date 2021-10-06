@@ -2,7 +2,8 @@
 // @name     s.to A Linkage
 // @namespace    http://tampermonkey.net/
 // @author       https://github.com/Skeeve
-// @version  7
+// @version  8
+// @description  Change every hoster-link in preparation for the other scripts 
 // @grant    none
 // @include  https://serien.sx/serie/stream/*/staffel-*
 // @include  https://serien.vc/serie/stream/*/staffel-*

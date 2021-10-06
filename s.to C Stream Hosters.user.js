@@ -2,7 +2,8 @@
 // @name     s.to C Stream Hosters
 // @namespace    http://tampermonkey.net/
 // @author       https://github.com/Skeeve
-// @version  7
+// @version  8
+// @description  Send link with meta information to jDownloader
 // @match  http://streamcloud.eu/*/.html
 // @match  https://openload.co/embed/*
 // @match  https://streamango.com/embed/*
@@ -16,6 +17,7 @@
 // @match  https://upstream.to/*
 // @match  https://streamtape.com/*
 // @grant    GM_xmlhttpRequest
+// @connect 127.0.0.1
 // ==/UserScript==
 
 // My default location for storing stuff
