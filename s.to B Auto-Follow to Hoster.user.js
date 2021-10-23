@@ -2,7 +2,7 @@
 // @name     s.to B Auto-Follow to Hoster
 // @namespace    http://tampermonkey.net/
 // @author       https://github.com/Skeeve
-// @version  8
+// @version  9
 // @description  Follow to the selected hoster
 // @grant    none
 // @include  https://serien.sx/serie/stream/*/staffel-*/episode-*
@@ -31,28 +31,28 @@ function do_stuff() {
 
     // get the season and episode
     var siteTitle=document.querySelector('div.hosterSiteTitle');
-		var season= siteTitle.getAttribute('data-season');
-		var episode= siteTitle.getAttribute('data-episode');
-    var title= siteTitle.querySelector('h2 :first-child').textContent;
+	var season= siteTitle.getAttribute('data-season');
+	var episode= siteTitle.getAttribute('data-episode');
+    var title= '';
+    var seasondir='';
+	var currentLanguage=0;
 
-    // get the current language
-    var lng= document.querySelector("img.selectedLanguage");
-    var currentLanguage = lng.getAttribute("data-lang-key");
-    var seasondir='Staffel';
-
-    // Is it a series watched in english?
-    if ( english.indexOf(series) >= 0 ) {
-      // Do we have it in english?
-      var en= document.querySelector("img[title='Englisch']");
-      if ( en !== null ) {
-        // Yes, so we will take that
-        currentLanguage= en.getAttribute("data-lang-key");
-        title= siteTitle.querySelector('h2 .episodeEnglishTitel').textContent;
-      }
-    }
-    if (currentLanguage == "2") {
-      seasondir='Season';
-    }
+	// get german and english?
+	var de= document.querySelector("img[title='Deutsch']");
+	var en= document.querySelector("img[title='Englisch']");
+    // Is it a series watched in english OR do we not have german?
+    if ( (english.indexOf(series) >= 0 || de === null) ) {
+    	currentLanguage= en.getAttribute("data-lang-key");
+        title= siteTitle.querySelector('h2 .episodeEnglishTitle').textContent;
+		seasondir='Season';
+    } else if (de !== null) {
+    	currentLanguage= de.getAttribute("data-lang-key");
+        title= siteTitle.querySelector('h2 .episodeGermanTitle').textContent;
+		seasondir='Staffel'
+	} else {
+		alert("Neither German nor English found.");
+		return;
+	}
     // set the window name to the info just found
     window.name= [series, season, episode, title, seasondir].join(sep).replace(/\s*[:\/]\s*/g, ' - ');
 
