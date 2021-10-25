@@ -44,8 +44,15 @@
             lnk.blur();
             row.css('background-color', bg);
             jQuery.post(lnk.href, data)
-            .done(function() {
-                $(lnk).toggleClass('is-outlined');
+            .done(function(data) {
+                if (data.match(/href="\/portal\/logout"/)) {
+                    $(lnk).toggleClass('is-outlined');
+                    $(lnk).children('i').removeClass('fa-exclamation-triangle').addClass('fa-heart');
+                    $(lnk).attr('title', 'Success!');
+                } else {
+                    $(lnk).children('i').removeClass('fa-heart').addClass('fa-exclamation-triangle');
+                    $(lnk).attr('title', 'Failed!\nMake sure you are logged in.');
+                }
             })
             .always(function()  {
                 row.css('background-color', bgcol);
@@ -68,4 +75,5 @@
         console.log(newStyle);
         GM_addStyle(newStyle);
     });
+    GM_addStyle('i.fa-exclamation-triangle {color:red;}');
 })();
