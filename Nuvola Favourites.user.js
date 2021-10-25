@@ -78,4 +78,17 @@
         GM_addStyle(newStyle);
     });
     GM_addStyle('i.fa-exclamation-triangle {color:red;}');
+
+    function refresh() {
+        jQuery.get('https://smartradio.frontier-nuvola.net/portal/content/radios')
+        .done(function(data) {
+            if (data.match(/href="\/portal\/logout"/)) {
+                console.log("refreshed");
+                window.setTimeout(refresh, 600000);
+            } else {
+                alert("Seems you are logged out.");
+            }
+        });
+    }
+    window.setTimeout(refresh, 600000);
 })();
