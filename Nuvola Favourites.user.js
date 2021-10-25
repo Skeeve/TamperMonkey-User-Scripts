@@ -13,7 +13,7 @@
 (function doit() {
     'use strict';
 
-    const mainpage = document.location.pathname.match('^/portal/favorites/([0-9a-fA-F]+)$');
+    const mainpage = document.location.pathname.match('^/portal/favorites/([0-9a-fA-F]+)(?:/.*)$');
     let myDevice = window.name;
     if (mainpage !== null) {
         myDevice = mainpage[1];
@@ -63,7 +63,9 @@
     });
     console.log("Buttons fixed:", btncount);
     $('tr.directory i.fa-folder').each(function(idx, dir) {
+        console.log(">>>> Found folder", dir);
         const dir_id = dir.closest('tr').getAttribute('data-sorting').replaceAll(/^\["([^"]+)".*$/g, "$1");
+        console.log(">>>> folder id", dir_id);
         $(dir.closest('table')).addClass('closed-' + dir_id);
         // $(dir).closest('tr').nextAll('tr[data-sorting*=' + dir_id +']').addClass('folder-' + idx);
         $(dir).on('click', function(evt) {
