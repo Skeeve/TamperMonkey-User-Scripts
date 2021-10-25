@@ -7,6 +7,7 @@
 // @match        https://smartradio.frontier-nuvola.net/portal/content/radios/*
 // @match        https://smartradio.frontier-nuvola.net/portal/content/feeds/*
 // @match        https://smartradio.frontier-nuvola.net/portal/favorites/*
+// @match        https://smartradio.frontier-nuvola.net/portal/devices
 // @grant        GM_addStyle
 // ==/UserScript==
 
@@ -15,6 +16,10 @@
 
     const mainpage = document.location.pathname.match('^/portal/favorites/([0-9a-fA-F]+)(?:/.*)$');
     let myDevice = window.name;
+    if (myDevice == 'NuvolaRelogin') {
+        window.close();
+        return;
+    }
     if (mainpage !== null) {
         myDevice = mainpage[1];
         window.name = myDevice;
@@ -52,6 +57,7 @@
                 } else {
                     $(lnk).children('i').removeClass('fa-heart').addClass('fa-exclamation-triangle');
                     $(lnk).attr('title', 'Failed!\nMake sure you are logged in.');
+                    relogin();
                 }
             })
             .always(function()  {
@@ -79,16 +85,11 @@
     });
     GM_addStyle('i.fa-exclamation-triangle {color:red;}');
 
-    function refresh() {
-        jQuery.get('https://smartradio.frontier-nuvola.net/portal/content/radios')
-        .done(function(data) {
-            if (data.match(/href="\/portal\/logout"/)) {
-                console.log("refreshed");
-                window.setTimeout(refresh, 600000);
-            } else {
-                alert("Seems you are logged out.");
-            }
-        });
+    function relogin() {
+        window.open(
+            'https://smartradio.frontier-nuvola.net/portal/oauth',
+            'NuvolaRelogin',
+            'fullscreen=no,height=750,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,titlebar=no,toolbar=no,width=500'
+        ).opener = null;
     }
-    window.setTimeout(refresh, 600000);
 })();
