@@ -2,7 +2,7 @@
 // @name         Nuvola Favourites
 // @namespace    http://tampermonkey.net/
 // @version      0.4
-// @description  try to improve nuvola
+// @description  try to take over the world!
 // @author       https://github.com/Skeeve
 // @match        https://smartradio.frontier-nuvola.net/portal/content/radios/*
 // @match        https://smartradio.frontier-nuvola.net/portal/content/feeds/*
@@ -57,8 +57,7 @@
     console.log("Buttons fixed:", btncount);
     $('tr.directory i.fa-folder').each(function(idx, dir) {
         const dir_id = dir.closest('tr').getAttribute('data-sorting').replaceAll(/^\["([^"]+)".*$/g, "$1");
-        $(dir.closest('table')).addClass('open-' + dir_id);
-        $(dir).toggleClass('fa-folder fa-folder-open');
+        $(dir.closest('table')).addClass('closed-' + idx);
         $(dir).closest('tr').nextAll('tr[data-sorting*=' + dir_id +']').addClass('folder-' + idx);
         $(dir).on('click', function(evt) {
             const dir = this;
