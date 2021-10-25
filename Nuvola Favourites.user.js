@@ -57,14 +57,14 @@
     console.log("Buttons fixed:", btncount);
     $('tr.directory i.fa-folder').each(function(idx, dir) {
         const dir_id = dir.closest('tr').getAttribute('data-sorting').replaceAll(/^\["([^"]+)".*$/g, "$1");
-        $(dir.closest('table')).addClass('closed-' + idx);
-        $(dir).closest('tr').nextAll('tr[data-sorting*=' + dir_id +']').addClass('folder-' + idx);
+        $(dir.closest('table')).addClass('closed-' + dir_id);
+        // $(dir).closest('tr').nextAll('tr[data-sorting*=' + dir_id +']').addClass('folder-' + idx);
         $(dir).on('click', function(evt) {
             const dir = this;
             $(dir).toggleClass('fa-folder fa-folder-open');
-            $(dir).closest('table').toggleClass('open-' + idx + ' closed-' + idx);
+            $(dir).closest('table').toggleClass('open-' + dir_id + ' closed-' + dir_id);
         });
-        const newStyle = 'table.closed-' + idx + ' tr.folder-' + idx + ' { display:none; }';
+        const newStyle = 'table.closed-' + dir_id + ' tr:not(.directory)[data-sorting*="' + dir_id+ '"] { display:none !important; }';
         console.log(newStyle);
         GM_addStyle(newStyle);
     });
