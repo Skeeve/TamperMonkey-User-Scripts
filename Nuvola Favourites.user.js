@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name         Nuvola Favourites
 // @namespace    http://tampermonkey.net/
-// @version      0.3
-// @description  try to take over the world!
+// @version      0.4
+// @description  try to improve nuvola
 // @author       https://github.com/Skeeve
 // @match        https://smartradio.frontier-nuvola.net/portal/content/radios/*
 // @match        https://smartradio.frontier-nuvola.net/portal/content/feeds/*
 // @match        https://smartradio.frontier-nuvola.net/portal/favorites/*
-// @grant        none
+// @grant        GM_addStyle
 // ==/UserScript==
 
 (function doit() {
@@ -55,4 +55,18 @@
         });
     });
     console.log("Buttons fixed:", btncount);
+    $('tr.directory i.fa-folder').each(function(idx, dir) {
+        const dir_id = dir.closest('tr').getAttribute('data-sorting').replaceAll(/^\["([^"]+)".*$/g, "$1");
+        $(dir.closest('table')).addClass('open-' + dir_id);
+        $(dir).toggleClass('fa-folder fa-folder-open');
+        $(dir).closest('tr').nextAll('tr[data-sorting*=' + dir_id +']').addClass('folder-' + idx);
+        $(dir).on('click', function(evt) {
+            const dir = this;
+            $(dir).toggleClass('fa-folder fa-folder-open');
+            $(dir).closest('table').toggleClass('open-' + idx + ' closed-' + idx);
+        });
+        const newStyle = 'table.closed-' + idx + ' tr.folder-' + idx + ' { display:none; }';
+        console.log(newStyle);
+        GM_addStyle(newStyle);
+    });
 })();
