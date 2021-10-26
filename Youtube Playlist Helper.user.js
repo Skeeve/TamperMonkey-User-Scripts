@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         Youtube Playlist Helper
 // @namespace    http://tampermonkey.net/
-// @version      0.2
-// @description  try to take over the world!
+// @version      0.3
+// @description  Some helpers for Youtube Playlists
 // @author       https://github.com/Skeeve
 // @match        https://www.youtube.com/playlist*
-// @grant        none
+// @grant        GM_xmlhttpRequest
+// @connect      127.0.0.1
 // ==/UserScript==
 
 (function() {
@@ -102,5 +103,73 @@
         adder.addEventListener('click', addAll)
         an.append(adder)
     }
-    // Your code here...
+    const downloadTo = window.name.replace(/^Download\b.*?(\w.*)$/, '$1');
+    if (window.name == downloadTo) return;
+
+    // DOWNLAODER BELOW ///////////////////////////////////////////////////////////////
+
+    // My default location for storing stuff
+    const TARGET =`/Volumes/${downloadTo}`;
+
+    // A tag used to signal to jDownloader what to do with the links
+    const TAG4JD = '#S-TO#';
+
+    // flashgot link of jDownloader
+    const JDOWNLOADER = "http://127.0.0.1:9666/flashgot";
+
+    function toJDownloader (link, channel, title) {
+        link+= TAG4JD + title;
+        const saveto= `${TARGET}/${channel}/`;
+
+        // collect the data to send to JD
+        var data= {
+            "passwords" : "",
+            "source": "",
+            "package": channel,
+            "urls": link,
+            "dir": saveto,
+            "submit": "submit"
+        };
+        console.debug(JDOWNLOADER, data);
+        // Send the data
+        GM_xmlhttpRequest({
+            method: "POST",
+            url: JDOWNLOADER,
+            data: objEncodeURIComponent(data),
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            onload: function(response) {
+                if ( response.status === 200 ) {
+                    console.log("Would close now");
+                }
+                else {
+                    console.log(response);
+                }
+            },
+        });
+    }
+
+    function objEncodeURIComponent(obj) {
+        var str = [];
+        for (var p in obj) {
+            if (obj.hasOwnProperty(p)) {
+                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            }
+        }
+        return str.join("&");
+    }
+
+    document
+        .querySelectorAll('ytd-playlist-video-list-renderer ytd-playlist-video-renderer')
+        .forEach( vid => {
+        const lnk = vid.querySelector('a#video-title');
+        const href = lnk.href;
+        const title = lnk.title;
+        const channel = vid.querySelector('ytd-channel-name yt-formatted-string#text').textContent;
+        toJDownloader(href, channel, title);
+    });
+
+    // Send current page - after some preparing - to jDownloader
+
 })();
