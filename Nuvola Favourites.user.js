@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Nuvola Favourites
 // @namespace    http://tampermonkey.net/
-// @version      0.4
+// @version      0.5
 // @description  try to make nuvola website a bit more comfortable
 // @author       https://github.com/Skeeve
 // @match        https://smartradio.frontier-nuvola.net/portal/content/radios/*
@@ -27,7 +27,7 @@
     }
 
     // Get the device ID from the URL
-    const mainpage = document.location.pathname.match('^/portal/favorites/([0-9a-fA-F]+)(?:/.*)$');
+    const mainpage = document.location.pathname.match('^/portal/favorites/([0-9a-fA-F]+)(?:/.*)?$');
     if (mainpage !== null) {
         myDevice = mainpage[1];
         // store the device in window.name
