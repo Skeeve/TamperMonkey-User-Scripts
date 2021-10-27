@@ -1,9 +1,10 @@
 // ==UserScript==
 // @name         Nuvola Favourites
 // @namespace    http://tampermonkey.net/
-// @version      0.6
+// @version      0.7
 // @description  try to make nuvola website a bit more comfortable
 // @author       https://github.com/Skeeve
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=frontier-nuvola.net
 // @match        https://smartradio.frontier-nuvola.net/portal/content/radios/*
 // @match        https://smartradio.frontier-nuvola.net/portal/content/feeds/*
 // @match        https://smartradio.frontier-nuvola.net/portal/favorites/*
