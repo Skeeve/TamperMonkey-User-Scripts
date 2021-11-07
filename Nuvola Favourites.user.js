@@ -73,7 +73,7 @@
         GM_setValue('NuvolaIgnore', JSON.stringify(NuvolaIgnore));
         showIgnore(ignoreBtn);
     }
-	
+
     function showIgnore(ignoreBtn) {
         const id = ignoreBtn.attr('data-id');
         if (NuvolaIgnore[id] === undefined) {
@@ -371,20 +371,19 @@
         // Handler to check every 10 seconds whether or not we
         // are still logged in.
         const checkLoginStatus = function() {
-			// Call the devices page to check for the logout button
-			jQuery.get(window.location.origin + '/portal/devices')
-				.done(function(data) {
-				// If it's there we are still logged in
-				const loggedIn = data.match(/href="\/portal\/logout"/);
-				if (loggedIn) {
-					// So we come back in 10 seconds
-					window.setTimeout(checkLoginStatus, 10000);
-				} else {
-					// We were logged out
-					// Show the overlay and wait until the user loggs in again.
-					$('#loggedout').show();
-				}
-			});
+			// Call the devices page to check for a redirect
+			const url = 'https://smartradio.frontier-nuvola.net/portal/devices';
+			fetch(url, { method: 'HEAD' })
+				.then(response => {
+					if (response.redirected) {
+						// We were logged out
+						// Show the overlay and wait until the user loggs in again.
+						$('#loggedout').show();
+					} else {
+						// come back in 10 seconds
+						window.setTimeout(checkLoginStatus, 10000);
+					}
+				});
         }
         checkLoginStatus();
     }
