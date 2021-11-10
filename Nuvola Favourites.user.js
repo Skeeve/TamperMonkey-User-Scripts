@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Nuvola Favourites
 // @namespace    http://tampermonkey.net/
-// @version      0.9
+// @version      0.10
 // @description  try to make nuvola website a bit more comfortable
 // @author       https://github.com/Skeeve
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=frontier-nuvola.net
@@ -207,11 +207,13 @@
 	    const buttons = $('a.button.is-small.is-rounded.is-primary');
 	    console.log("Enhancing buttons:", buttons.length);
 	    buttons.each(function(idx,elt) {
-	        // Set a click handler for the button
-	        const row = $(elt)
-	            .click(heartClick)
-	            .closest('tr')
-	        ;
+            const btn = $(elt);
+            // not for poens
+            if (btn.find('i.fa-pen').length == 0) {
+                // Set a click handler for the button
+	            btn.click(heartClick)
+            }
+	        const row = btn.closest('tr');
 			// Is there a reliability-column?
 	        const reliability = row.find('td:nth-child(6) > small');
 			console.log(reliability);
