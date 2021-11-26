@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Nuvola Favourites
 // @namespace    http://tampermonkey.net/
-// @version      0.10
+// @version      0.11
 // @description  try to make nuvola website a bit more comfortable
 // @author       https://github.com/Skeeve
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=frontier-nuvola.net
@@ -84,7 +84,6 @@
     }
 
 	function heartClick(event) {
-		console.log('Heartclick');
 		event.stopPropagation();
         const lnk = $(this);
         let data = {};
@@ -105,7 +104,6 @@
         lnk.blur();
         row.css('background-color', bg);
         // POST the request
-		console.log(data);
         jQuery.post(url, data)
             .done(function(data) {
             // If we were logged out, there should be no logout link in the result page
@@ -194,31 +192,49 @@
 		Device.id = path[3];
 		Device.name = $('h2 strong').text().replace(/^.*?:\s+/, '');
 		Device.folder = [];
+        let selectedFound = false;
 		$('tr.directory input.input[type="text"][name="name"]').each(function(idx, elt){
 			const name = elt.value;
 			const id = $(elt.closest('td')).find('input[type="hidden"][name="directory"]')[0].value;
 			Device.folder.push({ "id" : id, "name" : name});
+            selectedFound || id == Device.selected;
 		});
+        if (! selectedFound) Device.selected = '';
 		GM_setValue("NuvolaDevice", JSON.stringify(Device));
+        console.log(Device);
 	}
 
 	function prepare_hearts() {
 	    // Enhance all the "Heart-Buttons"
 	    const buttons = $('a.button.is-small.is-rounded.is-primary');
 	    console.log("Enhancing buttons:", buttons.length);
+        const favorites = {};
+        var countFavorites = 0;
 	    buttons.each(function(idx,elt) {
             const btn = $(elt);
-            // not for poens
+	        const row = btn.closest('tr');
+            const station_id = row.attr('id');
+            // not for pens
             if (btn.find('i.fa-pen').length == 0) {
                 // Set a click handler for the button
-	            btn.click(heartClick)
+	            btn.click(heartClick);
+                // Do we have no id?
+                if (station_id === undefined) {
+                    // then we are in the list of the device's favourites
+                    // we will store them
+                    favorites[btn.attr('href').replaceAll(/^\/portal\/favorites\/([^\/]+)\/.*/g, "$1")] = 1;
+                    ++countFavorites;
+                } else {
+                    if (Device.favorites[station_id.substr(1)] == 1) {
+                        btn.removeClass('is-outlined');
+                    } else {
+                        btn.addClass('is-outlined');
+                    }
+                }
             }
-	        const row = btn.closest('tr');
 			// Is there a reliability-column?
 	        const reliability = row.find('td:nth-child(6) > small');
-			console.log(reliability);
 			if (reliability.length > 0) {
-				const station_id = row.attr('id');
 				const ignoreBtn = reliability.wrap('<span class="to-ignore button is-rounded is-size-7" title="Click to ignore this Station">')
 					.parent();
 				ignoreBtn.attr('data-id', station_id)
@@ -229,17 +245,22 @@
 				}
 			}
 	    });
+        if (countFavorites > 0) {
+            console.log("Number of Favorites:", countFavorites);
+            Device.favorites = favorites;
+            GM_setValue('NuvolaDevice', JSON.stringify(Device));
+        }
 	    console.log("Buttons enhanced:", buttons.length);
 	}
 
 	function prepare_device_selector() {
-		const location = $('a[href="/portal/devices"]');
+		const loc = $('a[href="/portal/devices"]');
 		const sel = $('<select/>');
 		sel.change(change_device_folder);
-		sel.append($('<option/>').attr('value', location.attr('href')).text(location.attr('title')));
+		sel.append($('<option/>').attr('value', loc.attr('href')).text(loc.attr('title')));
+        sel.append($('<option/>').attr('value', '').text(`${Device.name} /`));
+        sel[0].selectedIndex = 1;
 		if (Device.folder.length > 0) {
-			sel.append($('<option/>').attr('value', '').text(`${Device.name} /`));
-			sel[0].selectedIndex = 1;
 			var i = 2;
 			Device.folder.forEach( fldr => {
 				sel.append($('<option/>').attr('value', fldr.id).text(`${Device.name} / ${fldr.name}`));
@@ -248,11 +269,8 @@
 				}
 				++i;
 			});
-		} else {
-			sel[0].selectedIndex = 1;
-			sel.append('<option/>').attr('value', '').text('...');
 		}
-		location.replaceWith(sel);
+		loc.replaceWith(sel);
 	}
 
     function setup() {
