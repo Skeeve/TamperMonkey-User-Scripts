@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Matheon Forum Tweaks
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  Wir mathen das…
 // @author       https://github.com/Skeeve
 // @match        https://www.mathekalender.de/wp/forums/*
@@ -13,8 +13,10 @@
     'use strict';
 
     GM_addStyle(`
-        .forums.bbp-replies {
-            font-size: 15px !important;
-        }
-    `);
+	.forums.bbp-replies,
+	.bbp-forum.content,
+	.bbp-body {
+		font-size: 15px !important;
+	}
+	`);
 })();
