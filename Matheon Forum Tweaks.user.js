@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Matheon Forum Tweaks
 // @namespace    http://tampermonkey.net/
-// @version      0.5
+// @version      0.6
 // @description  Wir mathen das…
 // @author       https://github.com/Skeeve
 // @match        https://www.mathekalender.de/wp/forums/*
@@ -20,6 +20,9 @@
 	}
 	.bsp-previewtext {
 		display: none !important;
+	}
+	li.bbp-forum {
+		display: block !important;
 	}
 	div > div > blockquote {
 		background-color: beige;
