@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Mathekalender Antwortmöglichkeiten
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  try to take over the world!
 // @author       https://github.com/Skeeve
 // @match        https://www.mathekalender.de/wp/de/kalender/aufgaben/aufgabe-*
@@ -21,11 +21,15 @@
         sol.addEventListener('change', function() {
             document.querySelectorAll('input[name="solution-radio"]')[this.selectedIndex].checked=true
         });
+        let selectedIndex = -1;
+        if ( null !== document.querySelector('select[name="solution"] option[selected]') ) {
+            selectedIndex = sol.selectedIndex;
+        }
         h4.parentNode.querySelectorAll('ol li').forEach( (li, idx) => {
             const radio = document.createElement('input');
             radio.setAttribute('type', 'radio');
             radio.setAttribute('name', 'solution-radio');
-            if (idx == sol.selectedIndex) radio.setAttribute('checked', 'checked');
+            if (idx == selectedIndex) radio.setAttribute('checked', 'checked');
             li.insertBefore(radio, li.firstChild);
             li.addEventListener('click', function() {
                 sol.selectedIndex = idx;
