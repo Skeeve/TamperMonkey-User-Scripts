@@ -11,6 +11,8 @@
 
 /*
 
+2022 - OUTDATED
+
 Some small helpers for the greate Math+ Kalender www.mathekalender.de
 
 1. Highlight the current day in red or green, depending of whether or
