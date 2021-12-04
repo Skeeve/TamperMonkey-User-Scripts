@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         Mathekalender Antwortmöglichkeiten
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  try to take over the world!
 // @author       https://github.com/Skeeve
 // @match        https://www.mathekalender.de/wp/de/kalender/aufgaben/aufgabe-*
+// @match        ttps://www.mathekalender.de/wp/calendar/challenges/challenge-*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=mathekalender.de
 // @grant        none
 // ==/UserScript==
@@ -14,7 +15,8 @@
 
     document.querySelectorAll('h4').forEach( h4 => {
         console.log("h4:", h4);
-        if (h4.textContent != 'Antwortmöglichkeiten:') return;
+        if (h4.textContent != 'Antwortmöglichkeiten:'
+           && h4.textContent != 'Possible answers:') return;
         const sol = document.querySelector('select[name="solution"]');
         sol.addEventListener('change', function() {
             document.querySelectorAll('input[name="solution-radio"]')[this.selectedIndex].checked=true
