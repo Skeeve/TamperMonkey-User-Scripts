@@ -1,10 +1,13 @@
 // ==UserScript==
 // @name         Matheon Forum Tweaks
 // @namespace    http://tampermonkey.net/
-// @version      0.6
+// @version      0.8
 // @description  Wir mathen das…
 // @author       https://github.com/Skeeve
 // @match        https://www.mathekalender.de/wp/forums/*
+// @match        https://www.mathekalender.de/wp/forum/
+// @match        https://www.mathekalender.de/wp/de/forums/*
+// @match        https://www.mathekalender.de/wp/de/forum/
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=mathekalender.de
 // @grant        GM_addStyle
 // ==/UserScript==
@@ -15,6 +18,7 @@
     GM_addStyle(`
 	.forums.bbp-replies,
 	.bbp-forum.content,
+	.bbp-forum-info,
 	.bbp-body {
 		font-size: 15px !important;
 	}
