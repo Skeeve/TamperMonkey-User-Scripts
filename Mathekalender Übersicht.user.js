@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Mathekalender Übersicht
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  try to take over the world!
 // @author       https://github.com/Skeeve
 // @match        https://www.mathekalender.de/wp/de/kalender/aufgaben/
@@ -26,11 +26,16 @@
         AntwortFehlt = ' - No answer yet';
         Antwort = ' - Answer:';
     }
-    while ( !wpb_column.classList.contains('wpb_column')) {
+    while ( !wpb_column.classList.contains('vc_row-fluid')) {
         wpb_column = wpb_column.parentNode;
     }
-    wpb_column.className = '';
+    while (wpb_column.lastChild) {
+        wpb_column.removeChild(wpb_column.lastChild);
+    }
 
+    aufgaben.forEach( (aufgabe, idx) => {
+        wpb_column.append(aufgabe.parentNode);
+    });
     aufgaben.forEach( (aufgabe, idx) => {
         fetch(aufgabe.href)
         .then( response => response.text() )
@@ -48,7 +53,7 @@
             }
             aufgabe.parentNode.append(solElt);
         })
-    })
+    });
 
 	function loesungsText(doc, index) {
 		let text = '';
