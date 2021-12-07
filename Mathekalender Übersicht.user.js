@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Mathekalender Übersicht
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.4
 // @description  try to take over the world!
 // @author       https://github.com/Skeeve
 // @match        https://www.mathekalender.de/wp/de/kalender/aufgaben/
@@ -34,7 +34,7 @@
     }
 
     aufgaben.forEach( (aufgabe, idx) => {
-        wpb_column.append(aufgabe.parentNode);
+        wpb_column.prepend(aufgabe.parentNode);
     });
     aufgaben.forEach( (aufgabe, idx) => {
         fetch(aufgabe.href)
