@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Nuvola Favourites
 // @namespace    http://tampermonkey.net/
-// @version      0.12
+// @version      0.13
 // @description  try to make nuvola website a bit more comfortable
 // @author       https://github.com/Skeeve
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=frontier-nuvola.net
@@ -144,7 +144,7 @@
 
 	function checkStation(event) {
         const player = event.currentTarget;
-        const url = JSON.parse(player.getAttribute('data-stream'))[0];
+        const url = JSON.parse(player.getAttribute('data-stream'))[0].replace(/^http:/, 'https:');
         console.log(url, player);
         try {
             fetch(url)
