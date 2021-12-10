@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Nuvola Favourites
 // @namespace    http://tampermonkey.net/
-// @version      0.11
+// @version      0.12
 // @description  try to make nuvola website a bit more comfortable
 // @author       https://github.com/Skeeve
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=frontier-nuvola.net
@@ -142,7 +142,34 @@
 		console.log(Device);
 	}
 
-	// helpers ///////////////////////////////////////////////////////////////
+	function checkStation(event) {
+        const player = event.currentTarget;
+        const url = JSON.parse(player.getAttribute('data-stream'))[0];
+        console.log(url, player);
+        try {
+            fetch(url)
+            .then(function(response) {
+                if (!response.ok) {
+                    cannotPlay(player, `Could not access ${url}`);
+                }
+                return undefined;
+            })
+            .catch((error) => {
+                cannotPlay(player, error);
+            })
+        } catch(error) {
+            cannotPlay(player, error);
+        }
+    }
+
+    // helpers ///////////////////////////////////////////////////////////////
+    function cannotPlay(player, msg) {
+        console.log("Cannot play:", msg);
+        player.setAttribute('disabled','disabled')
+        player.classList.add('is-outlined', 'is-light', 'tooltip')
+        player.setAttribute('data-tooltip', msg);
+    }
+
     function getStationId(row) {
         return $(row).attr('data-sorting').replaceAll(/^\["([^"]+)".*$/g, "$1");
     }
@@ -251,6 +278,12 @@
             GM_setValue('NuvolaDevice', JSON.stringify(Device));
         }
 	    console.log("Buttons enhanced:", buttons.length);
+        const players = $('i.fas.fa-play');
+        console.log("Enhancing players", players.length);
+        players.each(function(idx, elt){
+            $(elt.parentNode).click(checkStation);
+        });
+
 	}
 
 	function prepare_device_selector() {
