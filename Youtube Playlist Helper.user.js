@@ -1,13 +1,14 @@
 // ==UserScript==
 // @name         Youtube Playlist Helper
 // @namespace    http://tampermonkey.net/
-// @version      0.5
+// @version      0.6
 // @description  Some helpers for Youtube Playlists
 // @author       https://github.com/Skeeve
 // @match        https://www.youtube.com/watch?*
 // @match        https://www.youtube.com/playlist*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=youtube.com
 // @grant        GM_xmlhttpRequest
+// @grant        GM_openInTab
 // @connect      127.0.0.1
 // ==/UserScript==
 
@@ -42,18 +43,26 @@
     // LIKE ALL ///////////////////////////////////////////////////////////////////////
 
     function likeAll() {
-        const vid = document.querySelector('ytd-playlist-video-list-renderer ytd-playlist-video-renderer');
-        if (vid !== null) {
-            const lnk = vid.querySelector('a#video-title');
-            const params = new URLSearchParams(lnk.search);
-            const video_id = params.get('v');
-
-            const goback = new URL(window.location);
-            goback.hash = `#${video_id}`;
-
-            window.name = `LikeThis ${goback}`;
-            window.location.href = lnk.href;
+        if ( document.querySelector('.ytd-message-renderer#message') !== null) {
+            console.log("DONE");
+            return;
         }
+        const vid = document.querySelector('ytd-playlist-video-list-renderer ytd-playlist-video-renderer');
+        if (vid === null) {
+            console.log('... Waiting likeAll');
+            window.setTimeout( likeAll, 100);
+            return;
+        }
+        console.log(">>>> liking");
+        const lnk = vid.querySelector('a#video-title');
+        const params = new URLSearchParams(lnk.search);
+        const video_id = params.get('v');
+
+        const goback = new URL(window.location);
+        goback.hash = `#${video_id}`;
+
+        window.name = `LikeThis ${goback}`;
+        window.location.href = lnk.href;
     }
 
     // LIKE ONE ///////////////////////////////////////////////////////////////////////
@@ -83,32 +92,44 @@
     // REMOVE ONE /////////////////////////////////////////////////////////////////////
 
     function removeFromPlaylist() {
+        console.log("removeFromPlaylist");
         const removeVid = window.location.hash.substring(2);
+        console.log("To remove:", removeVid);
         let vid = document.querySelector(`
             ytd-playlist-video-list-renderer
               ytd-playlist-video-renderer
-                a#video-title[href*=${removeVid}]
+                a#video-title[href*="${removeVid}"]
             `);
+        if (vid === null) {
+            console.log("... Waiting removeFromPlaylist");
+            window.setTimeout(removeFromPlaylist, 100);
+            return;
+        }
+        let rest = document
+            .querySelectorAll('ytd-playlist-video-list-renderer ytd-playlist-video-renderer').length - 1;
+        console.log("Vid:", vid);
         let menu = null;
         while (menu == null) {
             vid = vid.parentNode;
             menu = vid.querySelector('yt-icon.ytd-menu-renderer');
         }
+        console.log("Menu:", menu);
         menu.click();
-        doRemoval();
+        doRemoval(rest);
     }
 
-    function doRemoval() {
+    function doRemoval(rest) {
+        console.log("doRemoval");
         let popUp = document.querySelector('tp-yt-iron-dropdown:not([aria-hidden="true"])');
         if (popUp === null) {
             console.log(">>>> No menu items yet");
-            window.setTimeout(doRemoval, 100);
+            window.setTimeout(function () { doRemoval(rest); }, 100);
             return;
         }
         let menuItems = popUp.querySelectorAll('ytd-menu-popup-renderer ytd-menu-service-item-renderer span');
         if (menuItems.length < 1) {
             console.log(">>>> No menu items yet");
-            window.setTimeout(doRemoval, 100);
+            window.setTimeout(function () { doRemoval(rest); }, 100);
             return;
         }
         const playList = ytInitialData.metadata.playlistMetadataRenderer.title;
@@ -126,7 +147,7 @@
                 window.setTimeout(waitRefresh, 100);
                 return;
             }
-            likeAll();
+            if (rest > 0) likeAll();
         };
         window.setTimeout(waitRefresh, 100);
     }
@@ -280,9 +301,14 @@
             return str.join("&");
         }
 
-        document
-            .querySelectorAll('ytd-playlist-video-list-renderer ytd-playlist-video-renderer')
-            .forEach( vid => {
+        let vids = document
+            .querySelectorAll('ytd-playlist-video-list-renderer ytd-playlist-video-renderer');
+        if (vids.length == 0) {
+            console.log("... Waiting doDownload");
+            window.setTimeout( function () { doDownload(downloadTo); }, 100 );
+            return;
+        }
+        vids.forEach( vid => {
             const lnk = vid.querySelector('a#video-title');
             const href = lnk.href;
             const title = lnk.title;
