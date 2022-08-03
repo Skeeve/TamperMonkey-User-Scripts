@@ -1,9 +1,11 @@
 // ==UserScript==
-// @name     s.to C Stream Hosters
+// @name         s.to C Stream Hosters
 // @namespace    http://tampermonkey.net/
-// @author       https://github.com/Skeeve
-// @version  8
-// @description  Send link with meta information to jDownloader
+// @version      0.2
+// @description  try to take over the world!
+// @author       You
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=launchreliantcleaverriver.com
+// @grant        GM_xmlhttpRequest
 // @match  http://streamcloud.eu/*/.html
 // @match  https://openload.co/embed/*
 // @match  https://streamango.com/embed/*
@@ -16,97 +18,111 @@
 // @match  https://oload.stream/*
 // @match  https://upstream.to/*
 // @match  https://streamtape.com/*
-// @grant    GM_xmlhttpRequest
-// @connect 127.0.0.1
+// @match https://launchreliantcleaverriver.com/*
+// @match https://dood.pm/*
+// @match https://reputationsheriffkennethsand.com/*
 // ==/UserScript==
 
-// My default location for storing stuff
-var TARGET='/Volumes/Multimedia/Mediatheken/Serien';
+(function() {
+    'use strict';
 
-// A tag used to signal to jDownloader what to do with the links
-var TAG4JD='#S-TO#';
+    // My default location for storing stuff
+    var TARGET='/Volumes/Multimedia/Mediatheken/Serien';
 
-// Separator between information parts
-var SEP='__';
+    // A tag used to signal to jDownloader what to do with the links
+    var TAG4JD='#S-TO#';
 
-// flashgot link of jDownloader
-var JDOWNLOADER="http://127.0.0.1:9666/flashgot";
+    // Separator between information parts
+    var SEP='__';
 
-// Used to signal to the script that the window can be closed
-var DONE='*DONE*';
+    // flashgot link of jDownloader
+    var JDOWNLOADER="http://127.0.0.1:9666/flashgot";
 
-function toJDownloader (link) {
-  // The name is stored in the window name in the form of
-  // SERIES $SEP SEASON# $SEP EPISODE# $SEP TITLE $SEP SEASONDIR
-  if ( window.name === DONE ) {
-    window.close();
-    return;
-  }
-  var sinfo= window.name.split(SEP);
-  if (sinfo.length == 1) {
-      // Oops. It's missing. Search in the hash part
-      sinfo= decodeURIComponent(document.location.hash.substr(1)).split(SEP);
-  }
-  var package= "";
-  var saveto="";
-  // So if we have something matching the pattern
-  if ( sinfo.length >=4 ) {
-    // The package becomes the Series
-    package= sinfo[0];
-    // The link gets tagged and will get the new filename in the form
-    // EPISODE# " - " TITLE
-    link+= TAG4JD + fill0(sinfo[2], 2) + " - " + sinfo[3];
-    // This will be the dwnload target
-    // $TARGET "/Season " SEASON# "/"
-    saveto= TARGET + "/" + sinfo[0] + "/" + sinfo[4] + " " +sinfo[1] + "/";
-  }
-  // collect the data to send to JD
-  var data= {
-    "passwords" : "",
-    "source": "",
-    "package": package,
-    "urls": link,
-    "dir": saveto,
-    "submit": "submit"
-  };
-  console.debug(JDOWNLOADER, data);
-  // Send the data
-  GM_xmlhttpRequest({
-  	method: "POST",
-  	url: JDOWNLOADER,
-  	data: objEncodeURIComponent(data),
-  	headers: {
- 	  	"Content-Type": "application/x-www-form-urlencoded"
-  	},
-    onload: function(response) {
-        if ( response.status === 200 ) {
-            document.querySelector('body').textContent="DONE!";
-            window.name=DONE;
-            window.location.reload();
-            console.log("Would close now");
+    // Used to signal to the script that the window can be closed
+    var DONE='*DONE*';
+
+    function toJDownloader (link) {
+        // The name is stored in the window name in the form of
+        // SERIES $SEP SEASON# $SEP EPISODE# $SEP TITLE $SEP SEASONDIR
+        if ( window.name === DONE ) {
+            window.close();
+            return;
         }
-        else {
-            console.log(response);
+        var sinfo= window.name.split(SEP);
+        if (sinfo.length == 1) {
+            // Oops. It's missing. Search in the hash part
+            sinfo= decodeURIComponent(document.location.hash.substr(1)).split(SEP);
+            if (sinfo.length == 1) {
+                alert("Oops!");
+                return;
+            }
         }
-  	},
-	});
-}
-
-function objEncodeURIComponent(obj) {
-  var str = [];
-  for (var p in obj) {
-    if (obj.hasOwnProperty(p)) {
-      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+        var pckg= "";
+        var saveto="";
+        // So if we have something matching the pattern
+        if ( sinfo.length >=4 ) {
+            // The pckg becomes the Series
+            pckg= sinfo[0];
+            // The link gets tagged and will get the new filename in the form
+            // EPISODE# " - " TITLE
+            link+= TAG4JD + fill0(sinfo[2], 2) + " - " + sinfo[3];
+            // This will be the dwnload target
+            // $TARGET "/Season " SEASON# "/"
+            saveto= TARGET + "/" + sinfo[0] + "/" + sinfo[4] + " " +sinfo[1] + "/";
+        }
+        // collect the data to send to JD
+        var data= {
+            "passwords" : "",
+            "source": "",
+            "package": pckg,
+            "urls": link,
+            "dir": saveto,
+            "submit": "submit"
+        };
+        console.debug(JDOWNLOADER, data);
+        // alert(JSON.stringify(data));
+        // Send the data
+        GM_xmlhttpRequest({
+            method: "POST",
+            url: JDOWNLOADER,
+            data: objEncodeURIComponent(data),
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            onload: function(response) {
+                if ( response.status === 200 ) {
+                    document.querySelector('body').textContent="DONE!";
+                    window.name=DONE;
+                    window.location.reload();
+                    console.log("Would close now");
+                }
+                else {
+                    console.log(response);
+                }
+            },
+        });
     }
-  }
-  return str.join("&");
-}
 
-// Prepend some zeros
-function fill0(x, num) {
-	x= ""+x;
-  return "0".repeat(Math.max(2-x.length,0)) + x;
-}
+    function objEncodeURIComponent(obj) {
+        var str = [];
+        for (var p in obj) {
+            if (obj.hasOwnProperty(p)) {
+                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            }
+        }
+        return str.join("&");
+    }
 
-// Send current page - after some preparing - to jDownloader
-toJDownloader(document.location.href.replace(/#.*$/, ''));
+    // Prepend some zeros
+    function fill0(x, num) {
+        x= ""+x;
+        return "0".repeat(Math.max(2-x.length,0)) + x;
+    }
+    var m = document.body.innerHTML.match(/"hls"\s*:\s*"(.*?)"/);
+    if (m !== null && m.length > 1) {
+        toJDownloader(m[1]);
+    } else {
+        // Send current page - after some preparing - to jDownloader
+        toJDownloader(document.location.href.replace(/#.*$/, ''));
+    }
+})();
