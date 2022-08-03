@@ -1,26 +1,29 @@
 // ==UserScript==
 // @name         s.to C Stream Hosters
+// @downloadURL  https://github.com/Skeeve/TamperMonkey-User-Scripts/raw/master/s.to%20C%20Stream%20Hosters.user.js
 // @namespace    http://tampermonkey.net/
 // @version      0.2
 // @description  try to take over the world!
 // @author       You
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=launchreliantcleaverriver.com
 // @grant        GM_xmlhttpRequest
-// @match  http://streamcloud.eu/*/.html
-// @match  https://openload.co/embed/*
-// @match  https://streamango.com/embed/*
-// @match  https://streamtape.com/*
-// @match  https://vidoza.net/*
-// @match  https://vidoza.org/*
-// @match  https://vivo.sx/*
-// @match  https://voe.sx/*
-// @match  https://gounlimited.to/*
-// @match  https://oload.stream/*
-// @match  https://upstream.to/*
-// @match  https://streamtape.com/*
+//
+// @match http://streamcloud.eu/*/.html
+// @match https://openload.co/embed/*
+// @match https://streamango.com/embed/*
+// @match https://streamtape.com/*
+// @match https://vidoza.net/*
+// @match https://vidoza.org/*
+// @match https://vivo.sx/*
+// @match https://voe.sx/*
+// @match https://gounlimited.to/*
+// @match https://oload.stream/*
+// @match https://upstream.to/*
+// @match https://streamtape.com/*
 // @match https://launchreliantcleaverriver.com/*
 // @match https://dood.pm/*
 // @match https://reputationsheriffkennethsand.com/*
+//
 // ==/UserScript==
 
 (function() {
