@@ -1,8 +1,9 @@
 // ==UserScript==
 // @name         s.to C Stream Hosters
+// @author       https://github.com/Skeeve
 // @downloadURL  https://github.com/Skeeve/TamperMonkey-User-Scripts/raw/master/s.to%20C%20Stream%20Hosters.user.js
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      9
 // @description  try to take over the world!
 // @author       You
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=launchreliantcleaverriver.com
