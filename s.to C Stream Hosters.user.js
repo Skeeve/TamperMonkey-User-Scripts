@@ -1,6 +1,7 @@
 // ==UserScript==
 // @name         s.to C Stream Hosters
 // @author       https://github.com/Skeeve
+// @updatedURL   https://github.com/Skeeve/TamperMonkey-User-Scripts/raw/master/s.to%20C%20Stream%20Hosters.user.js
 // @downloadURL  https://github.com/Skeeve/TamperMonkey-User-Scripts/raw/master/s.to%20C%20Stream%20Hosters.user.js
 // @namespace    http://tampermonkey.net/
 // @version      9
