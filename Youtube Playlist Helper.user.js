@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Youtube Playlist Helper
 // @namespace    http://tampermonkey.net/
-// @version      0.6
+// @version      1
 // @description  Some helpers for Youtube Playlists
 // @author       https://github.com/Skeeve
 // @match        https://www.youtube.com/watch?*
@@ -258,7 +258,7 @@
         // flashgot link of jDownloader
         const JDOWNLOADER = "http://127.0.0.1:9666/flashgot";
 
-        function toJDownloader (link, channel, title) {
+        function toJDownloader (link, channel, title, vid) {
             link+= TAG4JD + title;
             const saveto= `${TARGET}/${channel}/`.replaceAll(/['`´"]/g, '-');
 
@@ -283,9 +283,11 @@
                 onload: function(response) {
                     if ( response.status === 200 ) {
                         console.log("Would close now");
+                        vid.style.backgroundColor='aquamarine';
                     }
                     else {
                         console.log(response);
+                        vid.style.backgroundColor='indianred';
                     }
                 },
             });
@@ -308,12 +310,14 @@
             window.setTimeout( function () { doDownload(downloadTo); }, 100 );
             return;
         }
+		let delay = 500;
         vids.forEach( vid => {
             const lnk = vid.querySelector('a#video-title');
             const href = lnk.href;
             const title = lnk.title;
             const channel = vid.querySelector('ytd-channel-name yt-formatted-string#text').textContent;
-            toJDownloader(href, channel, title);
+            window.setTimeout(function(){toJDownloader(href, channel, title, vid);}, delay);
+			delay += 1000;
         });
     }
 })();
