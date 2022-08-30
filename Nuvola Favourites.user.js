@@ -1,7 +1,9 @@
 // ==UserScript==
 // @name         Nuvola Favourites
 // @namespace    http://tampermonkey.net/
-// @version      0.13
+// @version      0.14
+// @updateURL    https://github.com/Skeeve/TamperMonkey-User-Scripts/raw/master/Nuvola%20Favourites.user.js
+// @downloadURL  https://github.com/Skeeve/TamperMonkey-User-Scripts/raw/master/Nuvola%20Favourites.user.js
 // @description  try to make nuvola website a bit more comfortable
 // @author       https://github.com/Skeeve
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=frontier-nuvola.net
