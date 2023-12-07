@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Youtube Playlist Helper
 // @namespace    http://tampermonkey.net/
-// @version      1
+// @version      1.1
 // @description  Some helpers for Youtube Playlists
 // @author       https://github.com/Skeeve
 // @match        https://www.youtube.com/watch?*
@@ -70,14 +70,17 @@
     function likeThis(goback) {
         wait4btn();
         function wait4btn() {
-            const likeBtn = document.querySelector('#menu-container #menu button#button');
+            const likeBtn = document.querySelector('button[title^="Mag ich"]');
             if (likeBtn !== null) {
                 const pressed = likeBtn.getAttribute('aria-pressed');
+                console.log("Like button pressed:", pressed);
                 try {
                     if (pressed == 'false') {
+                        console.log("Like button clicking");
                         likeBtn.click();
                     }
                     if (pressed == 'true') {
+                        console.log("Will go back to", goback);
                         window.name = 'Remove';
                         window.location.href = goback;
                         return
@@ -85,6 +88,7 @@
                 }
                 finally {}
             }
+            console.log("Waiting for like button");
             window.setTimeout(wait4btn, 100);
         }
     }
@@ -250,10 +254,10 @@
     // DOWNLOADER BELOW ///////////////////////////////////////////////////////////////
     function doDownload(downloadTo) {
         // My default location for storing stuff
-        const TARGET =`/Volumes/${downloadTo}`;
+        const TARGET =`/Users/shk/Downloads/jdyt/${downloadTo}`;
 
         // A tag used to signal to jDownloader what to do with the links
-        const TAG4JD = '#S-TO#';
+        const TAG4JD = '#JDYT#';
 
         // flashgot link of jDownloader
         const JDOWNLOADER = "http://127.0.0.1:9666/flashgot";
@@ -321,3 +325,7 @@
         });
     }
 })();
+
+/*
+javascript:window.name='LikeAll and Remove';window.location.reload();
+*/
